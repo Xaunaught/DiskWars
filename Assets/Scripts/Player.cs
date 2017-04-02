@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using InControl;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +13,8 @@ public class Player : MonoBehaviour
     public TextMesh PlayerTextMesh;
 
     Vector3 oldVel;
+
+    //Assigned controller
 
     //These floats will be used to store the magnitude of the players velocity over the last couple of frames
     public float velMagnitude;
@@ -41,6 +40,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var inputDevice = InputManager.ActiveDevice;
+        print(InputManager.Devices[0].Name);
         //holding charge button
         if (Input.GetButton("Jump"))
         {
@@ -61,7 +62,8 @@ public class Player : MonoBehaviour
             if (chargeAmount > 0f)
             {
                 chargeAmount = chargeAmount + minCharge;
-                pushDir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+                pushDir = new Vector3(inputDevice.LeftStick.X, 0f, inputDevice.LeftStick.Y);
+                //pushDir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
                 //Debug.Log("Push force is " + (pushDir.x * chargeAmount) + "," + (pushDir.y * chargeAmount) + "," + (pushDir.z * chargeAmount));
                 rBody.AddForce((pushDir*chargeAmount), ForceMode.Impulse);
                 chargeAmount = 0f;
