@@ -123,9 +123,6 @@ public class Player : MonoBehaviour
         {
             otherPlayer.AddForce(player.velocity * player.mass, ForceMode.Impulse);
             player.velocity = new Vector3(0,0,0);
-            //rBody.AddForce((otherPlayer.velocity * otherPlayer.velocity.magnitude), ForceMode.Impulse);
-            //rBody.AddForce((-player.velocity * player.velocity.magnitude), ForceMode.Impulse);
-            //find a way to make the player bounce backwards
             print("player was faster");
         }
         else
