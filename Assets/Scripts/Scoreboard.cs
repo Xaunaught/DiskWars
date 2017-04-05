@@ -16,7 +16,7 @@ public class Scoreboard : MonoBehaviour {
         players = new List<GameObject>();
         UpdateScore();
     }
-	
+
     // Update is called once per frame
     void Update () {
     }
@@ -44,7 +44,7 @@ public class Scoreboard : MonoBehaviour {
 
     IEnumerator ScoreIncrease()
     {
-        print("score should be adding");
+        print("player 0 tage: " + players[0].tag);
         if(players[0].tag == "Player1")
         {
             while (players.Count == 1)
