@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
         GetInput();
         ProcessInput();
 
@@ -117,17 +117,15 @@ public class Player : MonoBehaviour
 
     void PlayerCollisionTest(Rigidbody player, Rigidbody otherPlayer)
     {
-        //print("player: " + player.velocity.magnitude + "   other: " + otherPlayer.velocity.magnitude);
         Player otherPlayerScript = otherPlayer.gameObject.GetComponent<Player>();
         print("player: " + velMagnitude + "   other: " + otherPlayerScript.velMagnitude);
-        //if (player.velocity.magnitude > otherPlayer.velocity.magnitude)
         if (velMagnitude > otherPlayerScript.velMagnitude)
         {
-            rBody.drag = 20;
+            otherPlayer.AddForce(player.velocity * player.mass, ForceMode.Impulse);
+            player.velocity = new Vector3(0,0,0);
             //rBody.AddForce((otherPlayer.velocity * otherPlayer.velocity.magnitude), ForceMode.Impulse);
             //rBody.AddForce((-player.velocity * player.velocity.magnitude), ForceMode.Impulse);
             //find a way to make the player bounce backwards
-            rBody.drag = 0;
             print("player was faster");
         }
         else
