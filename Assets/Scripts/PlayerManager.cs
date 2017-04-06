@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject player3object;
     public GameObject player4object;
 
+    public GameObject hill;
+
     public bool gameRunning;
 	// Use this for initialization
     private void Awake()
@@ -60,6 +62,7 @@ public class PlayerManager : MonoBehaviour
 	            player3.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 	            player4.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 	            gameRunning = true;
+	            hill.SetActive(true);
 	            print("Game started");
 	        }
 	    }

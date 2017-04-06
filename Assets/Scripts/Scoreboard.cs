@@ -10,6 +10,10 @@ public class Scoreboard : MonoBehaviour {
     public int score3 = 0;
     public int score4 = 0;
     public Text scoreBoard;
+    public TextMesh player1;
+    public TextMesh player2;
+    public TextMesh player3;
+    public TextMesh player4;
 
     // Use this for initialization
     void Start () {
@@ -93,5 +97,9 @@ public class Scoreboard : MonoBehaviour {
     void UpdateScore()
     {
         scoreBoard.text = "Player 1: " + score1 + "\n" + "Player 2: " + score2 + "\n" + "Player 3: " + score3 + "\n" + "Player 4: " + score4;
+        player1.text = score1.ToString();
+        player2.text = score1.ToString();
+        player3.text = score1.ToString();
+        player4.text = score1.ToString();
     }
 }
