@@ -15,6 +15,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject player4object;
 
     public GameObject hill;
+    public GameObject splash;
+    public GameObject timer;
 
     public bool gameRunning;
 	// Use this for initialization
@@ -62,7 +64,9 @@ public class PlayerManager : MonoBehaviour
 	            player3.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 	            player4.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 	            gameRunning = true;
+                splash.SetActive(false);
 	            hill.SetActive(true);
+                timer.SetActive(true);
 	            print("Game started");
 	        }
 	    }

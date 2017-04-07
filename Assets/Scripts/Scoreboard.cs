@@ -14,6 +14,8 @@ public class Scoreboard : MonoBehaviour {
     public TextMesh player2;
     public TextMesh player3;
     public TextMesh player4;
+    public float timeInRound;
+    public Text timer;
 
     // Use this for initialization
     void Start () {
@@ -23,6 +25,12 @@ public class Scoreboard : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        timeInRound -= Time.deltaTime;
+        timer.text = timeInRound.ToString();
+        if(timeInRound <= 0)
+        {
+            GameOver();
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -96,10 +104,17 @@ public class Scoreboard : MonoBehaviour {
 
     void UpdateScore()
     {
-        scoreBoard.text = "Player 1: " + score1 + "\n" + "Player 2: " + score2 + "\n" + "Player 3: " + score3 + "\n" + "Player 4: " + score4;
+        //scoreBoard.text = "Player 1: " + score1 + "\n" + "Player 2: " + score2 + "\n" + "Player 3: " + score3 + "\n" + "Player 4: " + score4;
         player1.text = score1.ToString();
-        player2.text = score1.ToString();
-        player3.text = score1.ToString();
-        player4.text = score1.ToString();
+        player2.text = score2.ToString();
+        player3.text = score3.ToString();
+        player4.text = score4.ToString();
+    }
+
+    void GameOver()
+    {
+        scoreBoard.text = "Player Green: " + score1 + "\n" + "Player Yellow: " + score2 + "\n" + "Player Pink: " + score3 + "\n" + "Player Blue: " + score4 + "\n \nEscape to Quit";
+        print("Game is done");
+        this.gameObject.SetActive(false);
     }
 }

@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private float chargeMultiplier;
     public int chargePercentage;
     public TextMesh PlayerTextMesh;
-
+    public GameObject playerManager;
     Vector3 oldVel;
 
 
@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private Vector3 moveVector;
     public bool chargeRe;
     public bool start;
+    public bool escape;
 
 
 
@@ -59,38 +60,6 @@ public class Player : MonoBehaviour
        
         GetInput();
         ProcessInput();
-
-
-        //var inputDevice = InputManager.ActiveDevice;
-        //holding charge button
-//        if (Input.GetButton("Jump"))
-//        {
-//            if (chargeAmount < maxCharge)
-//            {
-//                chargeAmount += Time.deltaTime * chargeMultiplier;
-//            }
-//            else
-//            {
-//                chargeAmount = maxCharge;
-//            }
-//            chargePercentage = (int)(chargeAmount / maxCharge * 100);
-//            PlayerTextMesh.text = chargePercentage.ToString();
-//            //print(chargePercentage);
-//        }
-//        else
-//        {
-//            if (chargeAmount > 0f)
-//            {
-//                chargeAmount = chargeAmount + minCharge;
-//                //pushDir = new Vector3(inputDevice.LeftStick.X, 0f, inputDevice.LeftStick.Y);
-//                pushDir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-//                //Debug.Log("Push force is " + (pushDir.x * chargeAmount) + "," + (pushDir.y * chargeAmount) + "," + (pushDir.z * chargeAmount));
-//                rBody.AddForce((pushDir*chargeAmount), ForceMode.Impulse);
-//                chargeAmount = 0f;
-//                chargePercentage = 0;
-//                PlayerTextMesh.text = chargePercentage.ToString();
-//            }
-//        }
     }
 
     void OnCollisionEnter(Collision c)
@@ -168,6 +137,10 @@ public class Player : MonoBehaviour
                 chargePercentage = 0;
                 PlayerTextMesh.text = chargePercentage.ToString();
             }
+        }
+        if(escape)
+        {
+            Application.Quit();
         }
     }
 }
