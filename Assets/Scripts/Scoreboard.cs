@@ -52,6 +52,10 @@ public class Scoreboard : MonoBehaviour {
             players.Remove(temp);
             print("player removed");
             //when a player leaves score needs to start counting
+            if(players.Count == 1)
+            {
+                StartCoroutine("ScoreIncrease");
+            }
         }
     }
 

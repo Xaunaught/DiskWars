@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
     {
         chargeAmount = 0f;
         minCharge = 3f;
-        maxCharge = 20f;
-        chargeMultiplier = 30;
+        maxCharge = 30f;
+        chargeMultiplier = 40;
         chargePercentage = 0;
         rBody = GetComponent<Rigidbody>();
     }
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         GetInput();
         ProcessInput();
     }
@@ -67,18 +67,18 @@ public class Player : MonoBehaviour
         if (c.gameObject.tag != "ground")
         {
             ContactPoint cp = c.contacts[0];
-            if(c.gameObject.tag == "Walls")
+            if (c.gameObject.tag == "Walls")
             {
                 rBody.velocity = Vector3.Reflect(oldVel, cp.normal);
             }
-            if(c.gameObject.tag != "Walls")
+            if (c.gameObject.tag != "Walls")
             {
                 PlayerCollisionTest(rBody, c.rigidbody);
             }
 
 
         }
-        
+
 
         //use a a collision to get velocity, comapre speeds, set bounceback to lower on dominant player
 
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         if (velMagnitude > otherPlayerScript.velMagnitude)
         {
             otherPlayer.AddForce(player.velocity * player.mass, ForceMode.Impulse);
-            player.velocity = new Vector3(0,0,0);
+            player.velocity = new Vector3(0, 0, 0);
             print("player was faster");
         }
         else
@@ -100,13 +100,14 @@ public class Player : MonoBehaviour
         }
     }
 
-   private void GetInput()
-   {
-       moveVector.x = player.GetAxis("Move Horizontal");
-       moveVector.y = player.GetAxis("Move Vertical");
-       chargeRe = player.GetButton("Charge");
-       start = player.GetButton("Start");
-   }
+    private void GetInput()
+    {
+        moveVector.x = player.GetAxis("Move Horizontal");
+        moveVector.y = player.GetAxis("Move Vertical");
+        chargeRe = player.GetButton("Charge");
+        start = player.GetButton("Start");
+        escape = player.GetButton("Escape");
+    }
 
     private void ProcessInput()
     {
@@ -132,13 +133,13 @@ public class Player : MonoBehaviour
                 //pushDir = new Vector3(inputDevice.LeftStick.X, 0f, inputDevice.LeftStick.Y);
                 pushDir = new Vector3(moveVector.x, 0f, moveVector.y);
                 //Debug.Log("Push force is " + (pushDir.x * chargeAmount) + "," + (pushDir.y * chargeAmount) + "," + (pushDir.z * chargeAmount));
-                rBody.AddForce((pushDir*chargeAmount), ForceMode.Impulse);
+                rBody.AddForce((pushDir * chargeAmount), ForceMode.Impulse);
                 chargeAmount = 0f;
                 chargePercentage = 0;
                 PlayerTextMesh.text = chargePercentage.ToString();
             }
         }
-        if(escape)
+        if (escape)
         {
             Application.Quit();
         }
